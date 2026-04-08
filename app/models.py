@@ -1,8 +1,6 @@
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from . import db
 import uuid
-
-db = SQLAlchemy()
 
 class Blacklist(db.Model):
     __tablename__ = 'blacklist'

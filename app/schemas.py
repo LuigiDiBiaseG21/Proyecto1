@@ -11,3 +11,4 @@ class BlacklistSchema(ma.SQLAlchemyAutoSchema):
     email = fields.String(required=True, validate=validate.Email())
     app_uuid = fields.String(required=True)
     blocked_reason = fields.String(validate=validate.Length(max=255))
+    ip_address = fields.String(dump_only=True)
