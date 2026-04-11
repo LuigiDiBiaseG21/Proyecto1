@@ -58,11 +58,11 @@
 			"item": [
 				{
 					"name": "POST - Registro Exitoso",
-					"event": [{ "listen": "test", "script": { "exec": ["pm.test('Status is 201', () => pm.response.to.have.status(201));", "pm.test('ID returned', () => pm.expect(pm.response.json()).to.have.property('id'));"] } }],
+					"event": [{ "listen": "test", "script": { "exec": ["pm.test('Status is 201', () => pm.response.to.have.status(201));", "pm.test('ID returned', () => pm.expect(pm.response.json()).to.have.property('id'));", "const email = pm.response.json().email; pm.environment.set('created_email', email);"] } }],
 					"request": {
 						"method": "POST",
 						"auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{jwt_token}}", "type": "string" }] },
-						"body": { "mode": "raw", "raw": "{\"email\": \"exito@uniandes.edu.co\", \"app_uuid\": \"550e8400-e29b-41d4-a716-446655440000\", \"blocked_reason\": \"Spam detectado\"}", "options": { "raw": { "language": "json" } } },
+						"body": { "mode": "raw", "raw": "{\"email\": \"exito{{$timestamp}}@uniandes.edu.co\", \"app_uuid\": \"550e8400-e29b-41d4-a716-446655440000\", \"blocked_reason\": \"Spam detectado\"}", "options": { "raw": { "language": "json" } } },
 						"url": "{{base_url}}/blacklists"
 					}
 				},
@@ -72,7 +72,7 @@
 					"request": {
 						"method": "GET",
 						"auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{jwt_token}}", "type": "string" }] },
-						"url": "{{base_url}}/blacklists/exito@uniandes.edu.co"
+						"url": "{{base_url}}/blacklists/{{created_email}}"
 					}
 				},
 				{
