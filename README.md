@@ -92,7 +92,7 @@ flask db upgrade
 
 ```
 
-*Nota: Si necesitas resetear las migraciones desde cero, usa `flask db stamp head` después de un upgrade si la base de datos ya está sincronizada.*
+_Nota: Si necesitas resetear las migraciones desde cero, usa `flask db stamp head` después de un upgrade si la base de datos ya está sincronizada._
 
 ## 🏃 Ejecución del Servicio
 
@@ -115,6 +115,16 @@ Ejecuta los tests automáticos para verificar la lógica interna y la conexión 
 ```bash
 python -m pytest -v -s
 ```
+
+### 1.1. Integración Continua con AWS CodeBuild
+
+Este repositorio incluye un archivo `buildspec.yml` en la raíz que AWS CodeBuild utiliza para:
+
+- instalar dependencias con `pip`
+- ejecutar `python -m pytest -q`
+- empaquetar el código fuente como artefacto de construcción
+
+Para configurar el proyecto en AWS CodeBuild, use el repositorio de GitHub como origen y deje que CodeBuild ejecute el `buildspec.yml`.
 
 ### 2. Pruebas de Integración (Newman/Postman)
 
@@ -180,7 +190,7 @@ flask db upgrade
 
 ```
 
-*¡No olvides hacer commit de la carpeta `migrations/`!*
+_¡No olvides hacer commit de la carpeta `migrations/`!_
 
 1. **Schemas:** Define la validación en `app/schemas.py` usando Marshmallow.
 
