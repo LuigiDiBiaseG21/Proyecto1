@@ -4,7 +4,8 @@ from app.models import Blacklist
 
 def test_health_check(client):
     response = client.get('/health')
-    assert response.status_code == 200
+    #assert response.status_code == 200
+    assert response.status_code == 999
     assert response.json['status'] == "UP"
 
 @patch('app.resources.db.session')
@@ -63,3 +64,4 @@ def test_unauthorized_access(client):
     # Verifica que el decorador @jwt_required() funcione
     response = client.get('/blacklists/any@test.com')
     assert response.status_code == 401
+
