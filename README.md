@@ -44,7 +44,7 @@ Microservicio robusto para la gestión de listas negras de emails, diseñado par
 
 ```bash
 
-git clone https://github.com/DevOps-Misw4304-202610/Proyecto1.git
+git clone https://github.com/LuigiDiBiaseG21/Proyecto1.git
 
 cd Proyecto1
 
@@ -92,7 +92,7 @@ flask db upgrade
 
 ```
 
-*Nota: Si necesitas resetear las migraciones desde cero, usa `flask db stamp head` después de un upgrade si la base de datos ya está sincronizada.*
+_Nota: Si necesitas resetear las migraciones desde cero, usa `flask db stamp head` después de un upgrade si la base de datos ya está sincronizada._
 
 ## 🏃 Ejecución del Servicio
 
@@ -114,6 +114,25 @@ Ejecuta los tests automáticos para verificar la lógica interna y la conexión 
 
 ```bash
 python -m pytest -v -s
+```
+
+### 1.1 Integración Continua (CI) con AWS CodeBuild y CodePipeline
+
+Este repositorio está listo para AWS CodeBuild y AWS CodePipeline usando la rama `master`.
+La configuración central se encuentra en el archivo `buildspec.yml` ubicado en la raíz del proyecto.
+
+- `buildspec.yml` instala dependencias, ejecuta pruebas y genera el artefacto `blacklist-app.zip`.
+- El pipeline de CodePipeline debe usar como origen el repositorio `LuigiDiBiaseG21/Proyecto1` y la rama `master`.
+- No se incluye despliegue automático en este pipeline; solo CI.
+
+Para más detalles de la configuración de AWS CodeBuild y CodePipeline, consulte `CI_PIPELINE.md`.
+
+Ejecuta localmente el mismo flujo:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pytest -q
 ```
 
 ### 2. Pruebas de Integración (Newman/Postman)
@@ -180,7 +199,7 @@ flask db upgrade
 
 ```
 
-*¡No olvides hacer commit de la carpeta `migrations/`!*
+_¡No olvides hacer commit de la carpeta `migrations/`!_
 
 1. **Schemas:** Define la validación en `app/schemas.py` usando Marshmallow.
 
